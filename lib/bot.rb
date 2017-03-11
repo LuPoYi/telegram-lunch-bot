@@ -15,6 +15,8 @@ You can control me by sending these commands:
 /update [old_name] [new_name]
 /remove [name]
 /random
+/choose    custom keyboard三選一
+/close     關閉keyboard
 
           "
           bot.api.send_message(chat_id: message.chat.id, text: ans)
@@ -53,10 +55,19 @@ You can control me by sending these commands:
             bot.api.send_message(chat_id: message.chat.id, text: "找不到 #{$3}.")
           end
 
-        when '/choose', '/random'
+        when'/random'
           list = $redis.lrange('LUNCH_LIST', 0, -1)
           list[rand(list.length)]
           bot.api.send_message(chat_id: message.chat.id, text: "吃 #{list[rand(list.length)]} ?")
+        when '/choose'
+          list = $redis.lrange('LUNCH_LIST', 0, -1)
+          sample = list.sample(3)
+          question = "吃 三選一? #{sample.join(', ')}"
+          answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: [[sample[0],sample[1]], [sample[2], 'Pass']], one_time_keyboard: true)
+          bot.api.send_message(chat_id: message.chat.id, text: question, reply_markup: answers)
+        when '/close'
+          kb = Telegram::Bot::Types::ReplyKeyboardRemove.new(remove_keyboard: true)
+          bot.api.send_message(chat_id: message.chat.id, text: 'Done', reply_markup: kb)
         end
       end
     end
