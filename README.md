@@ -21,4 +21,4 @@
 
 ### 實際運作如下圖
 
-![](images/demo.jpg)
+![](images/demo.png)
