@@ -14,8 +14,8 @@ You can control me by sending these commands:
 /add [name]
 /update [old_name] [new_name]
 /remove [name]
-/random
-/choose    custom keyboard三選一
+/random    隨機取得
+/choose    隨機三選一
 /close     關閉keyboard
 
           "
