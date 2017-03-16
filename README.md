@@ -5,6 +5,8 @@
 3.  ruby main.rb
 
 * 基本CURD可work
+* 隨機取得
+* 三選一
 
 ### 使用指令列表
 * /help
@@ -19,3 +21,4 @@
 
 ### 實際運作如下圖
 
+![](images/demo.jpg)
